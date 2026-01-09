@@ -89,24 +89,32 @@ hack-translation-pipeline/
 
 ## How to Run
 
-### Step 1: Translate VM to Hack Assembly
+### Step 1: Translate VM to Hack Assembly (VM → ASM)
 
-```bash
-python vm_translator/vm_to_asm.py path/to/input.vm
-```
+#### Input is a single `.vm` file
+`python vm_translator/vm_to_asm.py path/to/input.vm`
+
+#### Input is a directory containing one or more `.vm` files
+`python vm_translator/vm_to_asm.py path/to/inputDir`
+
+When a directory is provided, all `.vm` files in the directory are translated and combined into a single `.asm` output.
 
 Output:
-- Generates a `.asm` file containing Hack assembly code
+- Generates one `.asm` file containing Hack assembly code
 
-### Step 2: Assemble Hack Assembly to Machine Code
+---
 
-```bash
-python assembler/asm_to_bin.py path/to/input.asm
-```
+### Step 2: Assemble Hack Assembly to Machine Code (ASM → Hack)
+
+`python assembler/asm_to_bin.py path/to/input.asm`
+
+Note:
+- Input must be a single `.asm` file
+- Directory input is not supported
 
 Output:
 - Generates a `.hack` file containing 16-bit binary machine code
-
+  
 ---
 
 ## Design Principles
