@@ -594,6 +594,8 @@ def main():
     write(asm_list, asm_file)
 
 
-main()
+if __name__ == "__main__":
+    main()
 #test()
+
 
