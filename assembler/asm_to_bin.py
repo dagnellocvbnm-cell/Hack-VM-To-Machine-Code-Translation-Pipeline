@@ -1,4 +1,4 @@
-import re
+import re, sys, os
 
 comp_table = {
     # a = 0
@@ -175,22 +175,28 @@ def code(parsed_list, symbols):
     print(binary_list)
     return binary_list
 
-
+def get_hack_list(asm_file):
+    file_name = os.path.basename(asm_file)
+    suffix = file_name.split(".")[0]
+    parsed_list, symbols = parser(asm_file)
+    hack_list = code(parsed_list, symbols)
+    return hack_list
 
 def main():
-    parsedList, symbols = parser('Pong.asm')
-    binary_list = code(parsedList, symbols)
-
-    with open("Pong.hack", "w") as f:
-        for i in range (0, len(binary_list)):
-            if i == len(binary_list) - 1:
-                f.write(binary_list[i])
+    asm_path = sys.argv[1]
+    hack_file = os.path.splitext(asm_path)[0] + ".hack"
+    asm_file = os.path.splitext(asm_path)[0] + ".asm"
+    hack_list = get_hack_list(asm_file)
+    with open(hack_file, "w") as f:
+        for i in range (0, len(hack_list)):
+            if i == len(hack_list) - 1:
+                f.write(hack_list[i])
             else:
-                f.write(binary_list[i] + "\n")
-
+                f.write(hack_list[i] + "\n")
 
 
 main()
+
 
 
 
